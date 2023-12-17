@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Barrage Sidi Mohamed Ben Abdellah</title>
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  />
+  <style>
+    #map {
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="font-size: 32px; text-align: center;">Barrage Sidi Mohamed Ben Abdellah</h2>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    // Create a Leaflet map
+    var map = L.map('map').setView([33, -6], 16);
+
+    // Define your tile layers
+    var tileLayer2017 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      maxZoom: 19
+    });
+    var tileLayer2023 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      maxZoom: 19
+    });
+
+    // Add tile layers to the map
+    tileLayer2017.addTo(map);
+    tileLayer2023.addTo(map);
+
+    // Create a split map control
+    var splitMap = L.control.splitMap(tileLayer2017, tileLayer2023, {
+      thumbSize: 18,
+      padding: 0
+    });
+    splitMap.addTo(map);
+
+    // Legend
+    var legend = L.control({position: 'bottomright'});
+    legend.onAdd = function(map) {
+      var div = L.DomUtil.create('div', 'info legend');
+      var labels = ['Eau', 'Vegetation', 'Sol nu', 'Bati'];
+      var colors = ['#0000FF', '#00FF00', '#FFFF00', '#FF0000']; // Hex colors
+
+      // Loop through labels and colors to create legend items
+      for (var i = 0; i < labels.length; i++) {
+        div.innerHTML += '<i style="background:' + colors[i] + '"></i> ' + labels[i] + '<br>';
+      }
+      return div;
+    };
+    legend.addTo(map);
+  </script>
+</body>
+</html>
