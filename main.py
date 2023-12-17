@@ -14,8 +14,8 @@ m = leafmap.Map()
 
 
 # Vérifier si les colonnes attributs existent pour les jours sélectionnés
-selected_column2017 = 'envi2017.unknown'
-selected_column2023 = 'envi2023.unknown'
+selected_column2017 = f'envi2017.unknown'
+selected_column2023 = f'envi2023.unknown'
 # Configurer et exécuter la boucle d'événements avec asyncio
 
 m.split_map(
